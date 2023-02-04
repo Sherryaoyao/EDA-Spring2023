@@ -82,7 +82,7 @@ df_pass <- as.data.frame(pass)
 
 #Combining the dataframes and give names to the columns
 student_test_performance <- data.frame("Names"=names,"Test Scores"=pass, "Pass or Not"=pass)
-class(student_tet_performance)
+class(student_test_performance)
 student_test_performance
 
 ```
