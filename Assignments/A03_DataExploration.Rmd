@@ -32,6 +32,14 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Ex
 
 1.  Check your working directory, load necessary packages (tidyverse, lubridate), and upload two datasets: the ECOTOX neonicotinoid dataset (ECOTOX_Neonicotinoids_Insects_raw.csv) and the Niwot Ridge NEON dataset for litter and woody debris (NEON_NIWO_Litter_massdata_2018-08_raw.csv). Name these datasets "Neonics" and "Litter", respectively. Be sure to include the subcommand to read strings in as factors.
 
+```{r setup, include=FALSE}
+
+#install.packages('formatR')
+
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=80), tidy=TRUE)
+
+```
+
 ```{r echo=TRUE, message=TRUE, warning=TRUE}
 #Check working directory
 getwd()
@@ -107,7 +115,9 @@ class(Neonics$Conc.1..Author.)
 ```{r}
 #Plot of the number of studies conducted by publication year
 ggplot(Neonics) +
-  geom_freqpoly(aes(x = Publication.Year), bins = 50) + labs(y= "Number of Studies", x = "Publication Year") + labs (title = "Number of Studies Versus Publication Year")
+  geom_freqpoly(aes(x = Publication.Year), bins = 50) + 
+  labs(y= "Number of Studies", x = "Publication Year") + 
+  labs (title = "Number of Studies Versus Publication Year")
 ```
 
 10. Reproduce the same graph but now add a color aesthetic so that different Test.Location are displayed as different colors.
@@ -115,7 +125,10 @@ ggplot(Neonics) +
 ```{r}
 #Plot of the number of studies conducted by publication year at different test locations
 ggplot(Neonics) +
-  geom_freqpoly(aes(x = Publication.Year, color = Test.Location), bins = 50) + labs(y= "Number of Studies", x = "Publication Year") + labs(color="Test Location") + labs (title = "Number of Studies Versus Publication Year in Different Test Locations")
+  geom_freqpoly(aes(x = Publication.Year, color = Test.Location), bins = 50) +
+ labs(y= "Number of Studies", x = "Publication Year") +
+ labs(color="Test Location") +
+ labs (title = "Number of Studies Versus Publication Year in Different Test Locations")
 ```
 
 Interpret this graph. What are the most common test locations, and do they differ over time?
@@ -129,7 +142,10 @@ Interpret this graph. What are the most common test locations, and do they diffe
 ```{r}
 #Plot of the number of different Endpoints 
 ggplot(Neonics, aes(x = Endpoint)) +
-  geom_bar() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + labs(y= "Endpoint Count") + labs (title = "Number of Different Endpoints")
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+   labs(y= "Endpoint Count") +
+ labs (title = "Number of Different Endpoints")
 
 ```
 
@@ -168,7 +184,10 @@ summary(Litter$plotID)
 ```{r}
 #Bar graph of functionalGroup
 ggplot(Litter, aes(x = functionalGroup)) +
-  geom_bar() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + labs(y= "Counts within Different Functional Group", x = "Functional Group") + labs (title = "Counts of Different Functional Group")
+  geom_bar() + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+  labs(y= "Counts within Different Functional Group", x = "Functional Group") + 
+  labs (title = "Counts of Different Functional Group")
 ```
 
 15. Using `geom_boxplot` and `geom_violin`, create a boxplot and a violin plot of dryMass by functionalGroup.
@@ -176,12 +195,16 @@ ggplot(Litter, aes(x = functionalGroup)) +
 ```{r}
 #Boxplot of dryMass by functionalGroup
 ggplot(Litter) +
-  geom_boxplot(aes(x = functionalGroup, y = dryMass)) + labs(y= "Dry Mass", x = "Functional Group") + labs (title = "Dry Mass Versus Functional Group")
+  geom_boxplot(aes(x = functionalGroup, y = dryMass)) + 
+  labs(y= "Dry Mass", x = "Functional Group") + 
+  labs (title = "Dry Mass Versus Functional Group")
 
 #Violin plot of dryMass by functionalGroup
 ggplot(Litter) +
   geom_violin(aes(x = functionalGroup, y = dryMass), 
-              draw_quantiles = c(0.25, 0.5, 0.75)) + labs(y= "Dry Mass", x = "Functional Group") + labs (title = "Dry Mass Versus Functional Group")
+              draw_quantiles = c(0.25, 0.5, 0.75)) + 
+  labs(y= "Dry Mass", x = "Functional Group") + 
+  labs (title = "Dry Mass Versus Functional Group")
 ```
 
 Why is the boxplot a more effective visualization option than the violin plot in this case?
